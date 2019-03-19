@@ -6,7 +6,4 @@ Mostly for testing, but I'm hoping to create terminal-based dialogs for i3.
 
 dialog for increasing and decreasing volume
 
-```raw
-███████████████████████████████████████████████████████                         
-→,↑,k,l – vol up       ←,↓,h,j – vol down       h – mute        q – exit       
-```
+![volume screenshot](docs/volume.png)
