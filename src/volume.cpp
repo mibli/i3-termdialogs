@@ -61,23 +61,37 @@ public:
     VolumeComponent() {};
 
     bool OnEvent(Event event) override {
-        if (event == Event::ArrowUp || event == Event::ArrowRight || event.values[0] == 'k' || event.values[0] == 'l') {
+        if (event == Event::ArrowUp ||
+            event == Event::ArrowRight ||
+            event == Event::Character('k') ||
+            event == Event::Character('l')) {
             on_increase();
+            on_change();
+            return true;
         }
-        else if (event == Event::ArrowDown || event == Event::ArrowLeft || event.values[0] == 'j' || event.values[0] == 'h') {
+        
+        if (event == Event::ArrowDown ||
+            event == Event::ArrowLeft ||
+            event == Event::Character('j') ||
+            event == Event::Character('h')) {
             on_decrease();
+            on_change();
+            return true;
         }
-        else if (event.values[0] == 'q') {
+        
+        if (event == Event::Character('q')) {
             on_escape();
+            on_change();
+            return true;
         }
-        else if (static_cast<char>(event.values[0]) == 'm') {
+
+        if (event == Event::Character('m')) {
             on_mute();
+            on_change();
+            return true;
         }
-        else {
-            return Component::OnEvent(event);
-        }
-        on_change();
-        return true;
+
+        return Component::OnEvent(event);
     }
 
     std::function<void()> on_increase = [](){};
