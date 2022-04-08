@@ -69,7 +69,7 @@ public:
             on_change();
             return true;
         }
-        
+
         if (event == Event::ArrowDown ||
             event == Event::ArrowLeft ||
             event == Event::Character('j') ||
@@ -78,7 +78,7 @@ public:
             on_change();
             return true;
         }
-        
+
         if (event == Event::Character('q')) {
             on_escape();
             on_change();
@@ -119,7 +119,7 @@ int main(int argc, const char* argv[]) {
     component.volume = volctl.volume();
     component.on_increase = [&](){ volctl.volume(std::min(1.f, component.volume + 0.03f)); };
     component.on_decrease = [&](){ volctl.volume(std::max(0.f, component.volume - 0.03f)); };
-    component.on_escape = screen.ExitLoopClosure();
+    component.on_escape = [&](){ screen.ExitLoopClosure(); exit(0); };
     component.on_mute = [&](){ volctl.mute_toggle(); };
     component.on_change = [&](){ component.volume = volctl.volume();};
     screen.Loop(&component);
