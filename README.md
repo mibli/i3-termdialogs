@@ -14,12 +14,24 @@ Building should be as simple as:
 
 ### Dialogs
 
+To allow small windows on i3, You have to configure minimum floating window size.
+You also need a rule that will make the terminal float. I use matching with `floatme` title.
+
+For example:
+
+    for_window [title="floatme"] floating enable    # make windows with "floatme" title float
+    floating_minimum_size 50 x 20                   # lower the minimum floating window size
+                                                    # to 50 width and 20 height
+
 #### volume
 
-Dialog for increasing and decreasing volume. Example usage:
-
-    urxvtc --geometry 60x2 --title floatme -e ./volume
+Dialog for increasing and decreasing volume.
 
 ![volume screenshot](docs/volume.png)
 
-Unfortunately for some reason either X11, uxvt or i3 forces the window to be slightly larger than expected. I've tried st as well, but the result is identical.
+Example usage:
+
+    urxvtc --geometry 60x3 --title floatme -e volume    # urxvt has a bug where new window height
+                                                        # is 1 row lower than specified
+    st -g 60x2 -t floatme -e volume
+    xterm -T floatme -g 60x2 -e .build/volume
